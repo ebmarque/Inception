@@ -1,12 +1,55 @@
-version: '3.16'
 
-# services:
-#   nginx:
-#     build:
-#       context: ./Nginx
-#       dockerfile: Dockerfile
-#     container_name: nginx
-#     ports:
-#       - "80:80"
-#     networks:
-#       - internal
+services:
+
+  mariadb:
+    build: 
+      context: ./MariaDB
+      dockerfile: Dockerfile
+    container_name: mariadb
+    networks:
+      - Internal
+    volumes:
+      - mariadb:/var/lib/mysql
+    env_file:
+      - ./.env
+   
+  wordpress:
+    build:
+      context: ./WordPress
+      dockerfile: Dockerfile
+    container_name: wordpress
+    depends_on:
+      - mariadb
+    networks:
+      - Internal
+    env_file:
+      - ./.env
+    volumes:
+      - wordpress:/var/www/wordpress
+    restart: on-failure
+ 
+  nginx:
+    build: 
+      context: ./Nginx
+      dockerfile: Dockerfile
+    container_name: Nginx
+    networks:
+      - Internal
+    ports:
+      - "443:443"
+    volumes:
+      - wordpress:/var/www/wordpress
+    restart: on-failure
+    env_file:
+      - ./.env
+    depends_on:
+      - wordpress
+
+volumes:
+  wordpress:
+  mariadb:
+
+
+networks:
+  Internal:
+    driver: bridge

@@ -1,10 +1,22 @@
-FROM Debian:12.6-slim
+FROM debian:bullseye
 
-# RUN apt-get update -y && apt-get upgrade -y && apt-get install -y nginx vim sudo
+RUN apt-get update -y && apt-get upgrade -y && apt-get install -y \
+	php7.4 \
+	php7.4-mysql \
+	php7.4-cli \
+	php7.4-mbstring \
+	php7.4-fpm \
+	php-php-gettext \
+	mariadb-client \
+	wget \
+	&& rm -fr /etc/php/7.4/fpm/pool.d/www.conf \
+	&& mkdir -p /run/php
 
-# RUN mkdir /etc/run
+COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d/
+COPY ./script/entrypoint.sh /tmp/entrypoint.sh
 
-# COPY ./script/entrypoint.sh /etc/run
+RUN chmod 755 /tmp/entrypoint.sh
 
-# WORKDIR /etc/run
-# ENTRYPOINT [ "bash", "entrypoint.sh" ]
+WORKDIR /tmp
+
+ENTRYPOINT [ "bash", "entrypoint.sh" ]
