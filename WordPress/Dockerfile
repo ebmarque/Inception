@@ -15,7 +15,7 @@ RUN apt-get update -y && apt-get upgrade -y && apt-get install -y \
 COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d/
 COPY ./script/entrypoint.sh /tmp/entrypoint.sh
 
-RUN chmod 755 /tmp/entrypoint.sh
+RUN chmod 777 /tmp/entrypoint.sh
 
 WORKDIR /tmp
 
