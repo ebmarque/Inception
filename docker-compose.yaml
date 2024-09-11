@@ -1,55 +1,60 @@
-
 services:
-
   mariadb:
-    build: 
-      context: ./MariaDB
-      dockerfile: Dockerfile
+    build:
+      context: ./requirements/mariadb
+      dockerfile: dockerfile
     container_name: mariadb
     networks:
-      - Internal
+      - internal
     volumes:
       - mariadb:/var/lib/mysql
     env_file:
       - ./.env
-   
+
   wordpress:
     build:
-      context: ./WordPress
-      dockerfile: Dockerfile
+      context: ./requirements/wordpress
+      dockerfile: dockerfile
     container_name: wordpress
+    networks:
+      - internal
     depends_on:
       - mariadb
-    networks:
-      - Internal
+    restart: on-failure
     env_file:
       - ./.env
     volumes:
-      - wordpress:/var/www/wordpress
-    restart: on-failure
- 
+      - wordpress:/var/www/html
+
   nginx:
-    build: 
-      context: ./Nginx
-      dockerfile: Dockerfile
-    container_name: Nginx
-    networks:
-      - Internal
-    ports:
-      - "443:443"
-    volumes:
-      - wordpress:/var/www/wordpress
-    restart: on-failure
-    env_file:
-      - ./.env
+    build:
+      context: ./requirements/nginx
+      dockerfile: dockerfile
+    container_name: nginx
     depends_on:
       - wordpress
+    networks:
+      - internal
+    ports:
+      - "80:80"
+    volumes:
+      - wordpress:/var/www/html
+    env_file:
+      - ./.env
+    restart: on-failure
+
+networks:
+  internal:
+    driver: bridge
 
 volumes:
   wordpress:
+    driver_opts:
+      type: none
+      device: /Users/ebenezermarquezine/Desktop/Inception/data/html
+      o: bind
   mariadb:
-
-
-networks:
-  Internal:
-    driver: bridge
+    driver_opts:
+      type: none
+      device: /Users/ebenezermarquezine/Desktop/Inception/data/mysql
+      o: bind
