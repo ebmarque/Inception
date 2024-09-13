@@ -142,3 +142,57 @@ See 'docker image rm --help'.
 Usage:  docker image rm [OPTIONS] IMAGE [IMAGE...]
 
 Remove one or more images
+"docker image rm" requires at least 1 argument.
+See 'docker image rm --help'.
+
+Usage:  docker image rm [OPTIONS] IMAGE [IMAGE...]
+
+Remove one or more images
+"docker image rm" requires at least 1 argument.
+See 'docker image rm --help'.
+
+Usage:  docker image rm [OPTIONS] IMAGE [IMAGE...]
+
+Remove one or more images
+"docker image rm" requires at least 1 argument.
+See 'docker image rm --help'.
+
+Usage:  docker image rm [OPTIONS] IMAGE [IMAGE...]
+
+Remove one or more images
+"docker volume rm" requires at least 1 argument.
+See 'docker volume rm --help'.
+
+Usage:  docker volume rm [OPTIONS] VOLUME [VOLUME...]
+
+Remove one or more volumes
+"docker image rm" requires at least 1 argument.
+See 'docker image rm --help'.
+
+Usage:  docker image rm [OPTIONS] IMAGE [IMAGE...]
+
+Remove one or more images
+"docker volume rm" requires at least 1 argument.
+See 'docker volume rm --help'.
+
+Usage:  docker volume rm [OPTIONS] VOLUME [VOLUME...]
+
+Remove one or more volumes
+"docker image rm" requires at least 1 argument.
+See 'docker image rm --help'.
+
+Usage:  docker image rm [OPTIONS] IMAGE [IMAGE...]
+
+Remove one or more images
+"docker volume rm" requires at least 1 argument.
+See 'docker volume rm --help'.
+
+Usage:  docker volume rm [OPTIONS] VOLUME [VOLUME...]
+
+Remove one or more volumes
+"docker image rm" requires at least 1 argument.
+See 'docker image rm --help'.
+
+Usage:  docker image rm [OPTIONS] IMAGE [IMAGE...]
+
+Remove one or more images
