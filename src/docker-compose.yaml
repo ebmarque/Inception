@@ -51,10 +51,10 @@ volumes:
   wordpress:
     driver_opts:
       type: none
-      device: /Users/ebenezermarquezine/Desktop/Inception/data/html
+      device: /var/data/html
       o: bind
   mariadb:
     driver_opts:
       type: none
-      device: /Users/ebenezermarquezine/Desktop/Inception/data/mysql
+      device: /var/data/mysql
       o: bind
