@@ -6,14 +6,14 @@
 #    By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/13 10:07:04 by ebmarque          #+#    #+#              #
-#    Updated: 2024/09/13 12:28:18 by ebmarque         ###   ########.fr        #
+#    Updated: 2024/09/14 13:49:17 by ebmarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Variables
 DOCKER_COMPOSE = sudo docker compose
 DOCKER = sudo docker
-DATA_DIR = /var/data
+DATA_DIR = /home/ebarque/data
 
 # Targets
 all: up

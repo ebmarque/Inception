@@ -1,5 +1,15 @@
 FROM debian:12.7-slim
 
-RUN apt update -y && apt upgrade -y && apt install -y nginx
+RUN apt update -y && apt upgrade -y && apt install -y nginx \
+    openssl \
+    && mkdir -p /etc/nginx/ssl \
+    && mkdir -p /run/nginx && \
+    chown -R www-data /var/lib/nginx
+
 COPY ./conf/default /etc/nginx/sites-available/.
-CMD [ "nginx", "-g", "daemon off;" ]
+COPY ./conf/default /etc/nginx/nginx.conf
+COPY ./tools/entrypoint.sh .
+
+RUN chmod +x entrypoint.sh
+
+CMD [ "./entrypoint.sh" ]

@@ -1,9 +1,40 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    dockerfile                                         :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/09/14 15:32:15 by ebmarque          #+#    #+#              #
+#    Updated: 2024/09/14 15:34:25 by ebmarque         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+
+# Dockerfile for building a MariaDB container
+
 FROM debian:12.7-slim
 
-RUN apt update -y && apt upgrade -y && apt install -y mariadb-server
+# Update and upgrade the system packages
+RUN apt update -y && apt upgrade -y
+
+# Install MariaDB server
+RUN apt install -y mariadb-server
+
+# Copy the server configuration file
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/.
+
+# Copy the initialization SQL script
 COPY ./tools/init.sql /etc/mysql/init.sql
 
+# Copy the entrypoint script
+COPY ./tools/entrypoint.sh /etc/mysql/entrypoint.sh
+
+# Create a directory for the MySQL server to store runtime files
 RUN mkdir /run/mysqld
 
-CMD [ "mysqld" ]
+# Set executable permissions for the entrypoint script
+RUN chmod +x /etc/mysql/entrypoint.sh
+
+# Set the entrypoint command for the container
+CMD [ "./etc/mysql/entrypoint.sh" ]

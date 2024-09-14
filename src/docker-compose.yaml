@@ -36,7 +36,7 @@ services:
     networks:
       - internal
     ports:
-      - "80:80"
+      - "443:443"
     volumes:
       - wordpress:/var/www/html
     env_file:
@@ -51,10 +51,10 @@ volumes:
   wordpress:
     driver_opts:
       type: none
-      device: /var/data/html
+      device: /home/ebmarque/data/html
       o: bind
   mariadb:
     driver_opts:
       type: none
-      device: /var/data/mysql
+      device: /home/ebmarque/data/mysql
       o: bind
