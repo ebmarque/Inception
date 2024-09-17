@@ -10,6 +10,7 @@ services:
       - mariadb:/var/lib/mysql
     env_file:
       - ./.env
+    restart: always
 
   wordpress:
     build:
@@ -20,7 +21,7 @@ services:
       - internal
     depends_on:
       - mariadb
-    restart: on-failure
+    restart: always
     env_file:
       - ./.env
     volumes:

@@ -6,14 +6,15 @@
 #    By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/13 10:07:04 by ebmarque          #+#    #+#              #
-#    Updated: 2024/09/14 13:49:17 by ebmarque         ###   ########.fr        #
+#    Updated: 2024/09/17 12:40:16 by ebmarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Variables
-DOCKER_COMPOSE = sudo docker compose
-DOCKER = sudo docker
-DATA_DIR = /home/ebarque/data
+COMPOSE_DIRECTORY= -f./src/docker-compose.yaml
+DOCKER_COMPOSE = docker compose
+DOCKER = docker
+DATA_DIR = /home/ebmarque/data
 
 # Targets
 all: up
@@ -30,7 +31,7 @@ up:
 	@echo "╚─────────────────────────────────────────────────────────────────────────────────╝"
 	@echo "\033[0m"
 	@sudo mkdir -p $(DATA_DIR)/html $(DATA_DIR)/mysql
-	@$(DOCKER_COMPOSE) up -d --build
+	@$(DOCKER_COMPOSE) $(COMPOSE_DIRECTORY) up -d --build
 	@echo "\033[1;32mApplication started.\033[0m"
 
 down:
@@ -44,7 +45,7 @@ down:
 	@echo "│ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝     ╚═╝     ╚═╝╚═╝  ╚═══╝ ╚═════╝  │"
 	@echo "╚──────────────────────────────────────────────────────────────────╝"
 	@echo "\033[0m"
-	@$(DOCKER_COMPOSE) down
+	@$(DOCKER_COMPOSE) $(COMPOSE_DIRECTORY) down
 	@echo "\033[1;31mApplication stopped.\033[0m"
 
 clean:
@@ -58,8 +59,8 @@ clean:
 	@echo "\t│ ╚═════╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝│"
 	@echo "\t╚──────────────────────────────────────────╝"
 	@echo "\033[0m"
-	@$(DOCKER_COMPOSE) down
-	@$(DOCKER) image rm -f $$(sudo docker image ls -q) 2>>app.log || true
+	@$(DOCKER_COMPOSE) $(COMPOSE_DIRECTORY) down
+	@$(DOCKER) image rm -f $$(docker image ls -q) 2>>app.log || true
 	@echo "\t\t      \033[1;33mCleanup complete.\033[0m"
 
 fclean:
@@ -73,9 +74,9 @@ fclean:
 	@echo "│╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝ ╚═════╝   ╚═══╝  ╚══════╝    ╚═╝  ╚═╝╚══════╝╚══════╝│"
 	@echo "╚─────────────────────────────────────────────────────────────────────────────────╝"
 	@echo "\033[0m"
-	@$(DOCKER_COMPOSE) down
-	@$(DOCKER) image rm -f $$(sudo docker image ls -q)  2>>./app.log || true
-	@$(DOCKER) volume rm $$(sudo docker volume ls -q) 2>>./app.log || true
+	@$(DOCKER_COMPOSE) $(COMPOSE_DIRECTORY) down
+	@$(DOCKER) image rm -f $$(docker image ls -q)  2>>./app.log || true
+	@$(DOCKER) volume rm $$(docker volume ls -q) 2>>./app.log || true
 	@$(DOCKER) builder prune -f
 	@sudo rm -fr $(DATA_DIR)
 	@echo "\033[1;31mFull clean complete.\033[0m"
@@ -99,7 +100,7 @@ re: fclean up
 
 logs:
 	@echo "Displaying logs of running containers..."
-	@$(DOCKER_COMPOSE) logs -f
+	@$(DOCKER_COMPOSE) $(COMPOSE_DIRECTORY) logs -f
 
 rebuild:
 	@echo "\033[1;33m"
@@ -113,7 +114,7 @@ rebuild:
 	@echo "\t\t╚────────────────────────────────────────────────────╝"
 	@echo "\033[0m"
 	@echo "Rebuilding the containers..."
-	@$(DOCKER_COMPOSE) up -d --build --force-recreate
+	@$(DOCKER_COMPOSE) $(COMPOSE_DIRECTORY) up -d --build --force-recreate
 	@echo "Rebuild complete."
 
 

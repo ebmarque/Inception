@@ -11,9 +11,9 @@
 -- # **************************************************************************** #
 
 /**
- * Creates a database named 'wordpress'.
+ * Creates a database named 'MYSQL_DATABASE'.
  * 
- * Creates a user 'wpuser' with the password 'password' and grants all privileges on all databases to the user.
+ * Creates a user 'MYSQL_USER' with the password 'MYSQL_PASSWORD' and grants all privileges on all databases to the user.
  * 
  * Flushes the privileges to apply the changes.
  */
