@@ -6,14 +6,14 @@
 #    By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/14 15:32:15 by ebmarque          #+#    #+#              #
-#    Updated: 2024/09/14 15:34:25 by ebmarque         ###   ########.fr        #
+#    Updated: 2024/09/19 15:03:37 by ebmarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 # Dockerfile for building a MariaDB container
 
-FROM debian:12.7-slim
+FROM debian:bullseye-20240904-slim
 
 # Update and upgrade the system packages
 RUN apt update -y && apt upgrade -y

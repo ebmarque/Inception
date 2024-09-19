@@ -1,0 +1,6 @@
+"docker image rm" requires at least 1 argument.
+See 'docker image rm --help'.
+
+Usage:  docker image rm [OPTIONS] IMAGE [IMAGE...]
+
+Remove one or more images

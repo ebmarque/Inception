@@ -6,7 +6,7 @@
 #    By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/13 10:07:04 by ebmarque          #+#    #+#              #
-#    Updated: 2024/09/18 15:21:19 by ebmarque         ###   ########.fr        #
+#    Updated: 2024/09/19 14:52:09 by ebmarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ clean:
 	@echo "\033[0m"
 	@$(DOCKER_COMPOSE) $(COMPOSE_DIRECTORY) down
 	@$(DOCKER) image rm -f $$(docker image ls -q) 2>>app.log || true
+	@sudo rm -fr $(DATA_DIR)
 	@echo "\t\t      \033[1;33mCleanup complete.\033[0m"
 
 fclean:
@@ -78,7 +79,6 @@ fclean:
 	@$(DOCKER) image rm -f $$(docker image ls -q)  2>>./app.log || true
 	@$(DOCKER) volume rm $$(docker volume ls -q) 2>>./app.log || true
 	@$(DOCKER) builder prune -f
-	@sudo rm -fr $(DATA_DIR)
 	@echo "\033[1;31mFull clean complete.\033[0m"
 
 status:

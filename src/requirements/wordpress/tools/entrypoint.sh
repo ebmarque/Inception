@@ -15,9 +15,9 @@ chmod 777 wp-cli.phar
 ./wp-cli.phar core install --url=${SERVER_NAME} --title=${WP_TITLE} --admin_user=${ADMIN_USER} --admin_password=${WP_ADMIN_PASSWORD} --admin_email=${ADMIN_EMAIL} --allow-root
 
 # Create a guest user
-./wp-cli.phar user create guest guest@example.com --role=subscriber --user_pass=guest_password --allow-root
+./wp-cli.phar user create ${WP_USER_NAME} ${WP_USER_EMAIL} --role=${WP_USER_ROLE} --user_pass=${WP_USER_PASSWORD} --allow-root
 
 
 fi
 
-php-fpm8.2 -F
+php-fpm7.4 -F

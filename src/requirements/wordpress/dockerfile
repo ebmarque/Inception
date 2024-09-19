@@ -1,7 +1,7 @@
-FROM debian:12.7-slim
+FROM debian:bullseye-20240904-slim
 
-RUN apt update -y && apt upgrade -y && apt install -y php-fpm php-mysqli curl
-COPY ./conf/www.conf /etc/php/8.2/fpm/pool.d/.
+RUN apt update -y && apt upgrade -y && apt install -y php7.4-fpm php7.4-mysqli curl
+COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d/.
 COPY ./tools/entrypoint.sh .
-RUN chmod +x entrypoint.sh
+RUN chmod +x entrypoint.sh && mkdir -p /run/php
 ENTRYPOINT [ "./entrypoint.sh" ]
